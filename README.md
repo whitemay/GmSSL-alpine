@@ -1,3 +1,23 @@
+## About GmSSL-alpine
+
+This project try to help people build GmSSL in Alpine Linux, to make it working in docker environment.
+All the source codes keep updated from original project.
+
+## How to use
+
+```
+cd docker
+docker-compose build dev-setup
+docker-compose run --rm shell
+./config --openssldir=/etc/ssl --prefix=/ no-shared -lucontext
+make
+exit
+docker-compose build runtime
+docker-compose run --rm shell
+gmssl
+```
+That is all. Enjoy!
+
 ## About GmSSL
 
 [![Build Status](https://travis-ci.org/guanzhi/GmSSL.svg?branch=master)](https://travis-ci.org/guanzhi/GmSSL)
