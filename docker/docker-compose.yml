@@ -1,0 +1,34 @@
+version: '3.5'
+
+services:
+
+  dev-setup:
+    image: gmssl/dev
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.dev
+
+  runtime:
+    image: gmssl/base
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.base
+
+  common: &common
+    image: gmssl/dev
+    #depends_on: [dev-setup]
+    volumes:
+      - ..:/code:delegated
+    working_dir: /code
+
+  shell:
+    <<: *common
+    volumes:
+      - ..:/code:delegated
+    entrypoint: /bin/sh
+
+  test:
+    image: gmssl/base
+    volumes:
+      - ..:/code:delegated
+    entrypoint: /bin/sh

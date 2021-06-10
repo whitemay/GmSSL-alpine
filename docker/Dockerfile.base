@@ -1,0 +1,7 @@
+FROM alpine
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
+    apk add --no-cache libucontext
+COPY libcrypto.so.1.1 libssl.so.1.1 /lib/
+COPY apps/gmssl /usr/bin/
+
